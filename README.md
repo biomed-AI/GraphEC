@@ -6,7 +6,7 @@ Here, we proposed GraphEC, a geometric graph learning-based EC number predictor 
 GraphEC is developed under Linux environment with:
 Python 3.8.16, numpy v1.24.3, pyg v2.3.0, pytorch v1.13.1, biopython v1.81, debugpy v1.6.7, decorator v5.1.1, filelock, v3.12.1, gmp v6.2.1, idna v3.4, ipython v8.12.0, openfold v1.0.1, scipy 1.10.1, and six v1.16.0
 
-# Install and run GraphEC
+# Install and run the program
 **1.** Clone this repository by https://github.com/YidongSong/GraphEC.git   
       
 **2.** Install the packages required by GraphEC. The [ESMFold](https://github.com/facebookresearch/esm) and [ProtTrans](https://github.com/agemagician/ProtTrans) can be installed followed by their official tutorials. The pre-trained ProtT5-XL-UniRef50 model can be downloaded [here](https://zenodo.org/record/4644188)    
@@ -16,9 +16,24 @@ Python 3.8.16, numpy v1.24.3, pyg v2.3.0, pytorch v1.13.1, biopython v1.81, debu
 ```
 bash run.sh --task EC_number --fasta ./Data/fasta/EC_number.fasta --gpu 0
 ```
-where ```--task``` represents the prediction task (EC_number, ActiveSite, Optimum_pH); ```--fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction.   
+where ```--task``` represents the prediction task; ```--fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction.   
       
-**4.** The results can be found in ./EC_number/results, including the full predictions and top K predictive scores (K is default as 5).   
+The results can be found in ```./EC_number/results```, including the full predictions and top K predictive scores (K is default as 5).   
+
+**4.** Run GraphEC-AS by the following command
+
+```
+bash run.sh --task ActiveSite --fasta ./Data/fasta/Active_sites.fasta --gpu 0
+```
+
+The results are saved in ```./Optimum_pH/results```
+
+**5.** Run GraphEC-pH by the following command
+
+```
+bash run.sh --task Optimum_pH --fasta ./Data/fasta/optimum_pH.fasta --gpu 0
+```
+
       
 # Dataset and model   
 **1.** EC number prediction    
