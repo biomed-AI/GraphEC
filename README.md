@@ -11,7 +11,7 @@ Python 3.8.16, numpy v1.24.3, pyg v2.3.0, pytorch v1.13.1, biopython v1.81, debu
       
 **2.** Install the packages required by GraphEC. The [ESMFold](https://github.com/facebookresearch/esm) and [ProtTrans](https://github.com/agemagician/ProtTrans) can be installed, followed by their official tutorials. The pre-trained ProtT5-XL-UniRef50 model can be downloaded [here](https://zenodo.org/record/4644188) .   
       
-**3.** Run GraphEC with the following command    
+**3.** Run GraphEC with the following command:    
       
 ```
 bash run.sh --task EC_number --fasta ./Data/fasta/EC_number.fasta --gpu 0
@@ -20,7 +20,7 @@ where ```--task``` represents the prediction task; ```--fasta``` represents the 
       
 The results can be found in ```./EC_number/results```, including the full predictions and top K predictive scores (K is defaulted to 5).   
 
-**4.** Run GraphEC-AS by the following command
+**4.** Run GraphEC-AS by the following command:
 
 ```
 bash run.sh --task ActiveSite --fasta ./Data/fasta/Active_sites.fasta --gpu 0
@@ -28,7 +28,7 @@ bash run.sh --task ActiveSite --fasta ./Data/fasta/Active_sites.fasta --gpu 0
 
 The results are saved in ```./Optimum_pH/results```
 
-**5.** Run GraphEC-pH by the following command
+**5.** Run GraphEC-pH by the following command:
 
 ```
 bash run.sh --task Optimum_pH --fasta ./Data/fasta/optimum_pH.fasta --gpu 0
