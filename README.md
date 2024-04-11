@@ -17,6 +17,6 @@ where ```--task``` represents the prediction task (EC_number, ActiveSite, Optimu
 **4.** The results can be found in ./EC_number/results, including the full predictions and top K predictive scores (K is default as 5).   
 # Dataset and model   
 **1.** EC number prediction
-The training set is provided in ```./EC_number/data/datasets/Training set.csv```, as well as the two independent tests are provided in ```./EC_number/data/datasets/NEW-392.csv``` and ```./EC_number/data/datasets/Price-149.csv```
+The training set is provided in ```./EC_number/data/datasets/Training set.csv```, as well as the two independent tests are provided in ```./EC_number/data/datasets/NEW-392.csv``` and ```./EC_number/data/datasets/Price-149.csv```   
 The trained models are saved in ```./EC_number/model```
 
