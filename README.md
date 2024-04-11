@@ -18,5 +18,9 @@ where ```--task``` represents the prediction task (EC_number, ActiveSite, Optimu
 # Dataset and model   
 **1.** EC number prediction    
 The training set is provided in ```./EC_number/data/datasets/Training set.csv```, as well as the two independent tests are provided in ```./EC_number/data/datasets/NEW-392.csv``` and ```./EC_number/data/datasets/Price-149.csv```   
-The trained models are saved in ```./EC_number/model```
+The trained models are saved in ```./EC_number/model```     
+**2.** Active site prediction   
+The training set is saved in ```./Active_sites/data/datasets/train.pkl```, and the test set is saved in ```./Active_sites/data/datasets/test.pkl```    
+The trained models are saved in ```./Active_sites/model```
+
 
