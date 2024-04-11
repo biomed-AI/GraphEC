@@ -1,3 +1,4 @@
 # Introduction
 Here, we proposed GraphEC, a geometric graph learning-based EC number predictor established on the active sites and predicted structures. Specifically, the enzyme active sites were first identified because of their critical role in enzyme function. Guided by the active sites, GraphEC was trained using the geometric graph learning with the ESMFold-predicted protein structures. To augment the features, informative sequence embeddings were generated using a pre-trained language model (ProtTrans). Finally, a label diffusion algorithm was utilized to further improve the prediction by incorporating homology information. Additionally, the optimum pH of enzymes was predicted to reflect the enzyme-catalyzed reactions. 
 
+![figure1](https://github.com/YidongSong/GraphEC/assets/42714970/a4bbacbe-72d3-4884-9d94-7924f63a8aea)
