@@ -4,18 +4,4 @@ Here, we proposed GraphEC, a geometric graph learning-based EC number predictor 
 
 # System requirement
 GraphEC is developed under Linux environment with:
-Python 3.8.16
-numpy v1.24.3
-pyg v2.3.0
-pytorch v1.13.1
-biopython v1.81
-debugpy v1.6.7
-decorator v5.1.1
-filelock
-v3.12.1
-gmp v6.2.1
-idna v3.4
-ipython v8.12.0
-openfold v1.0.1
-scipy 1.10.1
-six v1.16.0
+Python 3.8.16, numpy v1.24.3, pyg v2.3.0, pytorch v1.13.1, biopython v1.81, debugpy v1.6.7, decorator v5.1.1, filelock, v3.12.1, gmp v6.2.1, idna v3.4, ipython v8.12.0, openfold v1.0.1, scipy 1.10.1, six v1.16.0
