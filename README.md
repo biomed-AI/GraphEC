@@ -18,7 +18,7 @@ bash run.sh --task EC_number --fasta ./Data/fasta/EC_number.fasta --gpu 0
 ```
 where ```--task``` represents the prediction task; ```--fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction.   
       
-The results can be found in ```./EC_number/results```, including the full predictions and top K predictive scores (K is default as 5).   
+The results can be found in ```./EC_number/results```, including the full predictions and top K predictive scores (K is defaulted to 5).   
 
 **4.** Run GraphEC-AS by the following command
 
