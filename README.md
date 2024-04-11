@@ -48,6 +48,15 @@ The trained models are saved in ```./Active_sites/model```
 The training set can be found in ```./Optimum_pH/data/datasets/train.pkl```, and the test set can be found in ```./Optimum_pH/data/datasets/test.pkl```     
 The trained models are saved in ```./Optimum_pH/model```     
 
+# Citation and contact
+Citation: preparing
+
+Contact: 
+Yidong Song (songyd6@mail2.sysu.edu.cn)  
+Yuedong Yang (yangyd25@mail.sysu.edu.cn)
+
+
+
 
 
 
