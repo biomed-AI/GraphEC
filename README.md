@@ -11,6 +11,6 @@ Python 3.8.16, numpy v1.24.3, pyg v2.3.0, pytorch v1.13.1, biopython v1.81, debu
 **2.** Install the packages required by GraphEC. The [ESMFold](https://github.com/facebookresearch/esm) and [ProtTrans](https://github.com/agemagician/ProtTrans) can be installed followed by their official tutorials. The pre-trained ProtT5-XL-UniRef50 model can be downloaded [here](https://zenodo.org/record/4644188)      
 **3.** Run GraphEC by the following command     
 ```
-bash run.sh
+bash run.sh --task EC_number --fasta ./Data/fasta/EC_number.fasta --gpu 0
 ```
-
+where ```--task``` represents the prediction task (EC_number, ActiveSite, Optimum_pH)
