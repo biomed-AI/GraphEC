@@ -17,6 +17,7 @@ Python 3.8.16, numpy v1.24.3, pyg v2.3.0, pytorch v1.13.1, biopython v1.81, debu
 bash run.sh --task EC_number --fasta ./Data/fasta/EC_number.fasta --gpu 0
 ```
 where ```--task``` represents the prediction task (EC_number, ActiveSite, Optimum_pH); ```--fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction.   
+      
 **4.** The results can be found in ./EC_number/results, including the full predictions and top K predictive scores (K is default as 5).   
       
 # Dataset and model   
