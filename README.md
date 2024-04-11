@@ -7,9 +7,9 @@ GraphEC is developed under Linux environment with:
 Python 3.8.16, numpy v1.24.3, pyg v2.3.0, pytorch v1.13.1, biopython v1.81, debugpy v1.6.7, decorator v5.1.1, filelock, v3.12.1, gmp v6.2.1, idna v3.4, ipython v8.12.0, openfold v1.0.1, scipy 1.10.1, and six v1.16.0
 
 # Install and run GraphEC
-**1.** Clone this repository by https://github.com/YidongSong/GraphEC.git 
-**2.** Install the packages required by GraphEC. The [ESMFold](https://github.com/facebookresearch/esm) and [ProtTrans](https://github.com/agemagician/ProtTrans) can be installed followed by their official tutorials. The pre-trained ProtT5-XL-UniRef50 model can be downloaded [here](https://zenodo.org/record/4644188)
-**3.** Run GraphEC by the following command
+**1.** Clone this repository by https://github.com/YidongSong/GraphEC.git   
+**2.** Install the packages required by GraphEC. The [ESMFold](https://github.com/facebookresearch/esm) and [ProtTrans](https://github.com/agemagician/ProtTrans) can be installed followed by their official tutorials. The pre-trained ProtT5-XL-UniRef50 model can be downloaded [here](https://zenodo.org/record/4644188)      
+**3.** Run GraphEC by the following command     
 ```
 bash run.sh
 ```
