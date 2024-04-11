@@ -100,6 +100,7 @@ def predict(args=None, seed=None):
 
     # Label diffusion
     lamda_list = [0, 0.1, 0.5, 1]
+    top_k = 5
     diffusion_pred = LabelDiffusion(test_pred, lamda_list)
     EC_id = pickle.load(open('./EC_number/data/EC_idx.pkl','rb'))
     id_EC = dict([val, key] for key, val in EC_id.items())
@@ -116,7 +117,7 @@ def predict(args=None, seed=None):
             if i == 1:
                 for j  in range(len(name)):
                     w1.writelines(name[j] + '\n')
-                    top_5 = np.argsort(np.array(test_pred[j]))[-5:][::-1]
+                    top_5 = np.argsort(np.array(test_pred[j]))[-top_k:][::-1]
                     for k in range(len(test_pred[j])):
                         w1.writelines(str(round(test_pred[j][k],3)) + ',' + ' ')
                     w1.writelines('\n')
