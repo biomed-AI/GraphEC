@@ -1,0 +1,3 @@
+The results of GraphEC-pH
+Name	prediction
+E2GDF4	acidic

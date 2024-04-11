@@ -1,0 +1,3 @@
+The results of GraphEC-pH
+Name	prediction
+Q8TZY2	neutral

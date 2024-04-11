@@ -1,0 +1,3 @@
+The results of GraphEC-pH
+Name	prediction
+A0A286JZ72	acidic

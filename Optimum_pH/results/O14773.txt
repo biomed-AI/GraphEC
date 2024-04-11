@@ -1,0 +1,3 @@
+The results of GraphEC-pH
+Name	prediction
+O14773	acidic

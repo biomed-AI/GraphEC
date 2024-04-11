@@ -1,0 +1,3 @@
+The results of GraphEC-pH
+Name	prediction
+A0ZSY5	neutral

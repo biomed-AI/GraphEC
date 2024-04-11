@@ -1,0 +1,3 @@
+{'node_input_dim': 1217, 'edge_input_dim': 450, 'hidden_dim': 128, 'layer': 4, 'augment_eps': 0.15, 'dropout': 0.2, 'lr': 0.0001, 'obj_max': 1, 'epochs': 50, 'patience': 8, 'batch_size': 16, 'folds': 5, 'seed': 2023, 'r': 15}
+
+model count: 5
