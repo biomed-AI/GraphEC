@@ -29,4 +29,10 @@ The trained models are saved in ```./EC_number/model```
 The training set is saved in ```./Active_sites/data/datasets/train.pkl```, and the test set is saved in ```./Active_sites/data/datasets/test.pkl```    
 The trained models are saved in ```./Active_sites/model```
 
+**3.** Optimum pH prediction   
+The training set can be found in ```./Optimum_pH/data/datasets/train.pkl```, and the test set can be found in ```./Optimum_pH/data/datasets/test.pkl```     
+The trained models are saved in ```./Optimum_pH/model```     
+
+
+
 
