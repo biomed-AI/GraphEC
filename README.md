@@ -37,7 +37,7 @@ bash run.sh --task Optimum_pH --fasta ./Data/fasta/optimum_pH.fasta --gpu 0
       
 # Dataset and model   
 **1.** EC number prediction    
-The training set is provided in ```./EC_number/data/datasets/Training set.csv```, with the two independent tests located in ```./EC_number/data/datasets/NEW-392.csv``` and ```./EC_number/data/datasets/Price-149.csv```   
+The training set is provided in ```./EC_number/data/datasets/Training_set.csv```, with the two independent tests located in ```./EC_number/data/datasets/NEW-392.csv``` and ```./EC_number/data/datasets/Price-149.csv```   
 The trained models are saved in ```./EC_number/model```     
        
 **2.** Active site prediction   
