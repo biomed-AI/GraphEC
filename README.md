@@ -52,7 +52,7 @@ The trained models are saved in ```./Optimum_pH/model```
 Citation: preparing
 
 Contact: 
-Yidong Song (songyd6@mail2.sysu.edu.cn)  
+In case you have questions, please contact Yidong Song (songyd6@mail2.sysu.edu.cn).  
 
 
 
