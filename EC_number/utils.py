@@ -107,6 +107,8 @@ def predict(args=None, seed=None):
     w2 = open('./EC_number/results/example_top5.txt','w')
     with open('./EC_number/results/example_all.txt','w') as w1:
         w1.writelines("The results of GraphEC" + '\n')
+        w1.writelines('The list of EC numbers:')
+        w1.writelines('\n')
         for i in range(len(id_EC)):
             w1.writelines(id_EC[i] + ',' + ' ')
         w1.writelines('\n')
