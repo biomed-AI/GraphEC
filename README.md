@@ -34,6 +34,7 @@ The results are saved in ```./Active_sites/results```
 bash run.sh Optimum_pH ./Data/fasta/optimum_pH.fasta --gpu 0
 ```
 where ```Optimum_pH``` indicates the prediction of optimum pH; ```./Data/fasta/optimum_pH.fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction.     
+
 The results are saved in ```./Optimum_pH/results```
 
 ### Note: 
