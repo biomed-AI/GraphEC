@@ -35,9 +35,9 @@ bash run.sh Optimum_pH ./Data/fasta/optimum_pH.fasta --gpu 0
 ```
 
 Note: If there are permission issues, please use the following code：   
-'''
+```
 chmod -R 755 ./EC_number/tools/
-'''
+```
 
       
 # Dataset and model   
