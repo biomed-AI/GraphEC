@@ -26,7 +26,7 @@ bash run.sh ActiveSite ./Data/fasta/Active_sites.fasta --gpu 0
 ```
 where ```ActiveSite``` represents the prediction of active sites; ```./Data/fasta/Active_sites.fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction. 
 
-The results are saved in ```./Optimum_pH/results```
+The results are saved in ```./Active_sites/results```
 
 **5.** Run GraphEC-pH by the following command:
 
