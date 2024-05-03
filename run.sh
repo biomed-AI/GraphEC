@@ -1,1 +1,1 @@
-python main.py --task EC_number --fasta ./Data/fasta/EC_number.fasta --gpu 0
+python main.py --task $1 --fasta $2 --gpu 0
