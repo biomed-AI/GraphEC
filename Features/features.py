@@ -31,7 +31,8 @@ def get_prottrans(fasta_file,output_path):
             else:
                 seq_list.append(" ".join(list(line.strip())))
 
-    model_path = "./Prot-T5-XL-U50"
+    # Replace it with your own path
+    model_path = "/home/songyd/software/Prot-T5-XL-U50"
     tokenizer = T5Tokenizer.from_pretrained(model_path, do_lower_case=False)
     model = T5EncoderModel.from_pretrained(model_path)
     gc.collect()
