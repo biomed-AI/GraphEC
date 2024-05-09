@@ -21,13 +21,12 @@ def process_fasta(fasta_path):
     pickle.dump(name_seq, open('./Data/example.pkl','wb'))
     return name_seq
 
-def extract_features(name_seq, fasta):
+def extract_features(name_seq, fasta, gpu):
     ID_list = []
     seq_list = []
     for key in name_seq.keys():
         ID_list.append(key)
         seq_list.append(name_seq[key])
-    
     signal_str = 0
     signal_prot = 0
     signal_dssp = 0
@@ -43,8 +42,8 @@ def extract_features(name_seq, fasta):
         features.get_esmfold(fasta, './Data/Structures/')
 
     if signal_prot == 1:
-        features.get_prottrans(fasta, './Data/ProtTrans/')
-
+        features.get_prottrans(fasta, './Data/ProtTrans/', gpu)
+        
     if signal_dssp == 1:
         dssp_path = "./Features/dssp-2.0.4/"
         features.get_dssp(fasta, dssp_path, './Data/Structures/', './Data/DSSP/')
@@ -57,8 +56,7 @@ if __name__ == '__main__':
     parser.add_argument("--gpu", type=str, default=None)
     args = parser.parse_args()
     name_seq = process_fasta(args.fasta)
-    extract_features(name_seq, args.fasta)
-
+    extract_features(name_seq, args.fasta, args.gpu)
     if args.task == 'EC_number':
         os.system('python ./Active_sites/main.py')
         os.system('python ./EC_number/main.py')
