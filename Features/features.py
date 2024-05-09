@@ -10,17 +10,12 @@ from Bio import pairwise2
 import pickle
 
 
-dssp_path = "./dssp-2.0.4/"
+dssp_path = "./Features/dssp-2.0.4/"
 
-def get_prottrans(fasta_file,output_path):
+def get_prottrans(fasta_file,output_path, gpu):
     num_cores = 2
     multiprocessing.set_start_method("forkserver")
     os.environ["OMP_NUM_THREADS"] = str(num_cores)
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--gpu", type = str, default = '0')
-    args = parser.parse_args()
-    gpu = args.gpu
-
     ID_list = []
     seq_list = []
     with open(fasta_file, "r") as f:
@@ -72,7 +67,7 @@ def get_prottrans(fasta_file,output_path):
         for seq_num in range(len(embedding)):
             seq_len = (attention_mask[seq_num] == 1).sum()
             seq_emd = embedding[seq_num][:seq_len-1]
-            torch.save(seq_emd, output_path + "/" + batch_ID_list[seq_num] + '.tensor')
+            torch.save(seq_emd, output_path + batch_ID_list[seq_num] + '.tensor')
             endtime = datetime.datetime.now()
             print('endtime')
             print(endtime)
@@ -104,7 +99,7 @@ def get_pdb_xyz(pdb_file):
     return np.array(X)
 
 def get_esmfold(fasta_file,output_path):
-    os.system('python ./esmfold/esmfold.py -i {fasta} -o {output} --chunk-size 128'.format(fasta=fasta_file,output=output_path))
+    os.system('python ./Features/esmfold/esmfold.py -i {fasta} -o {output} --chunk-size 128'.format(fasta=fasta_file,output=output_path))
     pdbfasta = {}
     with open(fasta_file) as r1:
         fasta_ori = r1.readlines()
@@ -114,10 +109,10 @@ def get_esmfold(fasta_file,output_path):
             seq = fasta_ori[i+1].replace('/n','')
             pdbfasta[name] = seq
     for key in pdbfasta.keys():
-        with open(output_path + '/' + key + '.pdb','r') as r1:
+        with open(output_path + key + '.pdb','r') as r1:
             pdb_file = r1.readlines()
         coord = get_pdb_xyz(pdb_file)
-        torch.save(torch.tensor(coord, dtype = torch.float32), output_path + '/' + key + '.tensor')
+        torch.save(torch.tensor(coord, dtype = torch.float32), output_path + key + '.tensor')
 
 def process_dssp(dssp_file):
     aa_type = "ACDEFGHIKLMNPQRSTVWY"
