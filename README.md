@@ -20,6 +20,12 @@ where ```EC_number``` represents the prediction task; ```./Data/fasta/EC_number.
       
 The results can be found in ```./EC_number/results```, including the full predictions and top K predictive scores (K is defaulted to 5).   
 
+### Note: 
+If there are permission issues, please use the following code：   
+```
+chmod -R 755 ./EC_number/tools/
+```
+
 **4.** Run GraphEC-AS by the following command:    
 ```
 bash run.sh ActiveSite ./Data/fasta/Active_sites.fasta --gpu 0
@@ -36,12 +42,6 @@ bash run.sh Optimum_pH ./Data/fasta/optimum_pH.fasta --gpu 0
 where ```Optimum_pH``` indicates the prediction of optimum pH; ```./Data/fasta/optimum_pH.fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction.     
 
 The results are saved in ```./Optimum_pH/results```
-
-### Note: 
-If there are permission issues, please use the following code：   
-```
-chmod -R 755 ./EC_number/tools/
-```
 
       
 # Dataset and model   
