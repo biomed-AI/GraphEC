@@ -51,7 +51,7 @@ def predict(model_class, args):
     r = config['r']
     task = config['task']
     
-    with open("./Optimum_pH/data/example.pkl", "rb") as f:
+    with open('./Data/' + "example.pkl", "rb") as f:
         test_data = pickle.load(f)
     test_dataset = ProteinGraphDataset(test_data, range(len(test_data)), args,r)
     test_dataloader = DataLoader(test_dataset, batch_size = 16, shuffle=False, drop_last=False, num_workers=num_workers, prefetch_factor=2)
