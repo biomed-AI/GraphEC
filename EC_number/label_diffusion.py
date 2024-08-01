@@ -102,14 +102,14 @@ def homology_matrix(fasta, cutoff = 0.1):
     return graph
 
 
-def LabelDiffusion(initial_pred, lamda, identity_cutoff = 0.1):
+def LabelDiffusion(initial_pred, lamda, args, identity_cutoff = 0.1):
     '''
     This is an efficient implementation of the label diffusion algorithm
     by S2F, using the sparse matrix throughout the caculation.
     W: homology sparse matrix
     '''
     train_fasta = Dataset_Path + "EC_train.fa"
-    test_fasta = Dataset_Path + "example.fa"
+    test_fasta = args.fasta
 
     os.system("{}diamond makedb --in {} -d {} --quiet".format(Diamond_PATH, train_fasta, train_fasta))
     print("Start alignment to the training set...")
