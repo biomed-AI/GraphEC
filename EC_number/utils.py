@@ -101,7 +101,7 @@ def predict(args=None, seed=None):
     # Label diffusion
     lamda_list = [0, 0.1, 0.5, 1]
     top_k = 5
-    diffusion_pred = LabelDiffusion(test_pred, lamda_list)
+    diffusion_pred = LabelDiffusion(test_pred, lamda_list, args)
     EC_id = pickle.load(open('./EC_number/data/EC_idx.pkl','rb'))
     id_EC = dict([val, key] for key, val in EC_id.items())
     w2 = open('./EC_number/results/example_top5.txt','w')
