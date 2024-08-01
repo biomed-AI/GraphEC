@@ -65,7 +65,7 @@ if __name__ == '__main__':
     extract_features(name_seq, args.fasta, args.gpu)
     if args.task == 'EC_number':
         os.system('python ./Active_sites/main.py')
-        os.system('python ./EC_number/main.py')
+        os.system('python ./EC_number/main.py --fasta {}'.format(args.fasta))
     elif args.task == 'ActiveSite':
         os.system('python ./Active_sites/main.py')
     elif args.task == 'Optimum_pH':
