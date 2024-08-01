@@ -10,6 +10,9 @@ parser = argparse.ArgumentParser()
 
 
 def process_fasta(fasta_path):
+    """
+    Process the input fasta file
+    """
     name_seq = {}
     with open(fasta_path, 'r') as r1:
         fasta = r1.readlines() 
@@ -22,6 +25,9 @@ def process_fasta(fasta_path):
     return name_seq
 
 def extract_features(name_seq, fasta, gpu):
+    """
+    Extract structural features and ProtTrans embeddings
+    """
     ID_list = []
     seq_list = []
     for key in name_seq.keys():
