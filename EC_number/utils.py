@@ -32,6 +32,9 @@ NN_config = {
 }
 
 def Seed_everything(seed=2022):
+    """
+    define the random Seed
+    """
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
@@ -40,6 +43,9 @@ def Seed_everything(seed=2022):
     torch.backends.cudnn.deterministic = True  
         
 def padding_ver1(x, batch_id, feature_dim, activate_site):
+    """
+    organize the data into batches
+    """
     batch_size = max(batch_id) + 1
     max_len= max(torch.unique(batch_id,return_counts=True)[1])
     batch_data = torch.zeros([batch_size,max_len,feature_dim])
@@ -56,6 +62,9 @@ def padding_ver1(x, batch_id, feature_dim, activate_site):
     return batch_data, mask, batch_activate_site
 
 def predict(args=None, seed=None):
+    """
+    predict the EC numbers
+    """
     model_class = NN_config['model_class']
     node_input_dim = NN_config['feature_dim']
     edge_input_dim = NN_config['edge_input_dim']
@@ -66,18 +75,25 @@ def predict(args=None, seed=None):
     batch_size = NN_config['batch_size']
     num_workers = NN_config['num_workers']
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    
+
+    # load the active site data
     with open("./Active_sites/results/test_pred_dict.pkl",'rb') as r1:
         test_active_sites = pickle.load(r1)
 
+    # load the data for prediction
     with open('./Data/example.pkl', "rb") as f:
         test_data = pickle.load(f)
+
+    # construct the dataset
     test_dataset = ProteinGraphDataset(test_data, range(len(test_data)), args, test_active_sites)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, drop_last=False, num_workers=num_workers, prefetch_factor=2)
 
     models = []
     for fold in range(5):
+        # load the model
         state_dict = torch.load('./EC_number/model/' + 'fold%s.ckpt'%fold, device)
+        
+        # define the model
         model = model_class(node_input_dim, edge_input_dim, hidden_dim, layer, dropout, augment_eps, device).to(device)
         model.load_state_dict(state_dict)
         model.eval()
@@ -91,8 +107,11 @@ def predict(args=None, seed=None):
             batch_data, mask_data, batch_activate_site = padding_ver1(batch.node_feat, batch.batch, batch.node_feat.shape[1], batch.activate_site)
             batch.to(device)
             batch_activate_site = batch_activate_site.to(device)
+
+            # get the predictions
             preds = [model(batch.X, batch.node_feat, batch.edge_index, batch.seq, batch.batch, batch_data, mask_data, batch_activate_site) for model in models]
             name.extend(batch.name)
+            # obtain the mean of the prediction results
             preds = torch.stack(preds,0).mean(0) 
             test_pred.append(preds.sigmoid().detach().cpu().numpy())
 
@@ -101,6 +120,7 @@ def predict(args=None, seed=None):
     # Label diffusion
     lamda_list = [0, 0.1, 0.5, 1]
     top_k = 5
+    # use the label diffusion
     diffusion_pred = LabelDiffusion(test_pred, lamda_list, args)
     EC_id = pickle.load(open('./EC_number/data/EC_idx.pkl','rb'))
     id_EC = dict([val, key] for key, val in EC_id.items())
