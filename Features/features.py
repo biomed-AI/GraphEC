@@ -10,9 +10,16 @@ from Bio import pairwise2
 import pickle
 
 
+"""
+get the ProtTrans embeddings and structural features
+"""
+
 dssp_path = "./Features/dssp-2.0.4/"
 
 def get_prottrans(fasta_file,output_path, gpu):
+    """
+    get ProtTrans embeddings
+    """
     num_cores = 2
     multiprocessing.set_start_method("forkserver")
     os.environ["OMP_NUM_THREADS"] = str(num_cores)
@@ -73,6 +80,9 @@ def get_prottrans(fasta_file,output_path, gpu):
             print(endtime)
 
 def get_pdb_xyz(pdb_file):
+    """
+    get the coordinates
+    """
     current_pos = -1000
     X = []
     current_aa = {} # N, CA, C, O, R
@@ -170,6 +180,9 @@ def match_dssp(seq, dssp, ref_seq):
 
 
 def get_dssp(fasta, dssp_path, esmfold_path, dssp_save):
+    """
+    get dssp features
+    """
     with open(fasta, 'r') as r1:
         data_fasta = r1.readlines()
     for i in range(0,len(data_fasta)-1,2):
