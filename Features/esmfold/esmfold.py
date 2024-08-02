@@ -10,6 +10,11 @@ import esm
 from esm.data import read_fasta
 from timeit import default_timer as timer
 
+
+"""
+obtain the ESMFold-predicted structures
+"""
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
