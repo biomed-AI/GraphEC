@@ -14,6 +14,9 @@ def sparse_divide_nonzero(a, b):
 
 
 def jaccard(W):
+    """
+    get the Jaccard similarity matrix 
+    """
     Co = W.dot(W.T)
     CLEN = W.sum(axis=1) # (N, 1) numpy matrix
 
@@ -26,6 +29,9 @@ def jaccard(W):
 
 
 def compute_L(W):
+    """
+    get the Laplacian matrix
+    """
     JW = jaccard(W).multiply(W)
     degree = 1.0 / JW.sum(axis=1) # shape = (N, 1)
     W_S2F = 0.5 * (JW.multiply(degree) + JW.multiply(degree.T))
@@ -38,6 +44,9 @@ def compute_L(W):
 
 
 def homology_matrix(fasta, cutoff = 0.1):
+    """
+    get the homology network
+    """
     ID = []
     with open(fasta, "r") as f:
         lines = f.readlines()
