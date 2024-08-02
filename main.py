@@ -45,12 +45,15 @@ def extract_features(name_seq, fasta, gpu):
             signal_dssp = 1
     
     if signal_str == 1:
+        # get the structural features from ESMFold-predicted structures
         features.get_esmfold(fasta, './Data/Structures/')
 
     if signal_prot == 1:
+        # get the ProtTrans embeddings
         features.get_prottrans(fasta, './Data/ProtTrans/', gpu)
         
     if signal_dssp == 1:
+        # get the DSSP features
         dssp_path = "./Features/dssp-2.0.4/"
         features.get_dssp(fasta, dssp_path, './Data/Structures/', './Data/DSSP/')
         
@@ -64,11 +67,14 @@ if __name__ == '__main__':
     name_seq = process_fasta(args.fasta)
     extract_features(name_seq, args.fasta, args.gpu)
     if args.task == 'EC_number':
+        # predict the EC numbers
         os.system('python ./Active_sites/main.py')
         os.system('python ./EC_number/main.py --fasta {}'.format(args.fasta))
     elif args.task == 'ActiveSite':
+        # predict the active sites
         os.system('python ./Active_sites/main.py')
     elif args.task == 'Optimum_pH':
+        # predict the optimum pH
         os.system('python ./Optimum_pH/main.py')
     else:
         print('Please enter the correct task name!')
