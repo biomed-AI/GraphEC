@@ -27,6 +27,9 @@ config = {
 }
 
 def Seed_everything(seed=42):
+    """
+    define the random Seed
+    """
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
@@ -37,6 +40,9 @@ def Seed_everything(seed=42):
     torch.backends.cudnn.deterministic = True
 
 def predict(model_class, args):
+    """
+    predict the active sites
+    """
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     node_input_dim = config['node_input_dim']
@@ -49,14 +55,19 @@ def predict(model_class, args):
     batch_size = config['batch_size']
     folds = config['folds']
 
+    # load the data for prediction
     with open('./Data/' + "example.pkl", "rb") as f:
         test_data = pickle.load(f)
+    
+    # construct the dataset
     test_dataset = ProteinGraphDataset(test_data, range(len(test_data)), args)
     test_dataloader = DataLoader(test_dataset, batch_size = batch_size, shuffle=False, drop_last=False, num_workers=num_workers, prefetch_factor=2)
 
     models = []
     for fold in range(folds):
+        # load the model
         state_dict = torch.load('./Active_sites/model/' + 'fold%s.ckpt'%fold, device)
+        # define the model
         model = model_class(node_input_dim, edge_input_dim, hidden_dim, layer, dropout, augment_eps, task='ActiveSite').to(device)
         model.load_state_dict(state_dict)
         model.eval()
@@ -69,11 +80,14 @@ def predict(model_class, args):
         data = data.to(device)
 
         with torch.no_grad():
+            # get the predictions
             outputs = [model(data.X, data.node_feat, data.edge_index, data.seq, data.batch).sigmoid() for model in models]
+            # obtain the mean of the prediction results
             outputs = torch.stack(outputs,0).mean(0)
 
         test_pred += list(outputs.detach().cpu().numpy())
-        # 导出预测结果
+       
+        # export prediction results
         IDs = data.name
         outputs_split = torch_geometric.utils.unbatch(outputs, data.batch)
         for i, ID in enumerate(IDs):
