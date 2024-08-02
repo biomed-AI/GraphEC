@@ -6,6 +6,9 @@ import torch_geometric
 
 
 class ProteinGraphDataset(data.Dataset):
+    """
+    construct the dataset
+    """
     def __init__(self, dataset, index, args, radius=15 ): # ???
         super(ProteinGraphDataset, self).__init__()
 
@@ -29,9 +32,16 @@ class ProteinGraphDataset(data.Dataset):
     def _featurize_graph(self, idx):
         name = self.IDs[idx]
         with torch.no_grad():
+            # get the atomic coordinates from ESMFold-predicted structures
             X = torch.load('./Data/' + "Structures/" + name + ".tensor")
+
+            # get the sequence features
             seq = torch.tensor([self.letter_to_num[aa] for aa in self.dataset[name][0]], dtype=torch.long)
+
+            # get the ProtTrans features
             prottrans_feat = torch.load(open('./Data/' + "ProtTrans/" + name + ".tensor",'rb'))
+
+            # get the DSSP features
             dssp_feat = torch.load('./Data/' + 'DSSP/' + name + ".tensor")
             
             pre_computed_node_feat = torch.cat([prottrans_feat, dssp_feat], dim=-1)
@@ -45,6 +55,9 @@ class ProteinGraphDataset(data.Dataset):
 
 
 def get_geo_feat(X, edge_index):
+    """
+    get geometric node features and edge features
+    """
     pos_embeddings = _positional_embeddings(edge_index)
     node_angles = _get_angle(X)
     node_dist, edge_dist = _get_distance(X, edge_index)
@@ -57,6 +70,9 @@ def get_geo_feat(X, edge_index):
 
 
 def _positional_embeddings(edge_index, num_embeddings=16):
+    """
+    get the positional embeddings
+    """
     d = edge_index[0] - edge_index[1]
 
     frequency = torch.exp(
@@ -68,6 +84,9 @@ def _positional_embeddings(edge_index, num_embeddings=16):
     return PE
 
 def _get_angle(X, eps=1e-7):
+    """
+    get the angle features
+    """
     # psi, omega, phi
     X = torch.reshape(X[:, :3], [3*X.shape[0], 3])
     dX = X[1:] - X[:-1]
@@ -113,6 +132,9 @@ def _rbf(D, D_min=0., D_max=20., D_count=16):
     return RBF
 
 def _get_distance(X, edge_index):
+    """
+    get the distance features
+    """
     atom_N = X[:,0]  # [L, 3]
     atom_Ca = X[:,1]
     atom_C = X[:,2]
@@ -140,6 +162,9 @@ def _get_distance(X, edge_index):
     return node_dist, edge_dist
 
 def _get_direction_orientation(X, edge_index): # N, CA, C, O, R
+    """
+    get the direction features
+    """
     X_N = X[:,0]  # [L, 3]
     X_Ca = X[:,1]
     X_C = X[:,2]
