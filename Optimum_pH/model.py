@@ -17,6 +17,9 @@ def split_batch(x,batchid):
     return batchx
         
 class GNNLayer(nn.Module):
+    """
+    define GNN layer for subsequent computations
+    """
     def __init__(self, num_hidden, dropout=0.2, num_heads=4):
         super(GNNLayer, self).__init__()
         self.dropout = nn.Dropout(dropout)
@@ -49,6 +52,9 @@ class GNNLayer(nn.Module):
 
 
 class EdgeMLP(nn.Module):
+    """
+    define MLP operation for edge updates
+    """
     def __init__(self, num_hidden, dropout=0.2):
         super(EdgeMLP, self).__init__()
         self.dropout = nn.Dropout(dropout)
@@ -85,6 +91,9 @@ class Context(nn.Module):
 
 
 class Graph_encoder(nn.Module):
+    """
+    construct the graph encoder module
+    """
     def __init__(self, node_in_dim, edge_in_dim, hidden_dim,
                  seq_in=False, num_layers=4, drop_rate=0.2):
         super(Graph_encoder, self).__init__()
@@ -121,6 +130,9 @@ class Graph_encoder(nn.Module):
         return h_V
 
 class Attention(nn.Module):
+    """
+    define the attention module
+    """
     def __init__(self, input_dim, dense_dim, n_heads):
         super(Attention, self).__init__()
         self.input_dim = input_dim
@@ -146,13 +158,19 @@ class Attention(nn.Module):
         return attention
 
 class GraphEC_pH(nn.Module): 
+    """
+    construct the GraphEC-pH model
+    """
     def __init__(self, node_input_dim, edge_input_dim, hidden_dim, num_layers, dropout, augment_eps, task,device):
         super(GraphEC_pH, self).__init__()
         self.augment_eps = augment_eps
         self.device = device
         self.hidden_dim = hidden_dim
+        
+        # define the encoder layer
         self.Graph_encoder = Graph_encoder(node_in_dim=node_input_dim, edge_in_dim=edge_input_dim, hidden_dim=hidden_dim, seq_in=False, num_layers=num_layers, drop_rate=dropout)
 
+        # define the attention layer
         self.attention = Attention(hidden_dim,dense_dim=16,n_heads=4)
         
         self.input_block = nn.Sequential(
@@ -188,6 +206,7 @@ class GraphEC_pH(nn.Module):
             X = X + self.augment_eps * torch.randn_like(X)
             h_V = h_V + self.augment_eps * torch.randn_like(h_V)
         
+        # get the geometric features
         h_V_geo, h_E = get_geo_feat(X, edge_index)
 
         h_V = torch.cat([h_V, h_V_geo], dim=-1)
@@ -197,6 +216,7 @@ class GraphEC_pH(nn.Module):
         batchx = split_batch(h_V,batch_id) # [B,L,hid]
         feature_embedding = torch.tensor([]).to(self.device)
         for h_vi in batchx:
+            # Attention pooling
             att = self.attention(h_vi) # [1, heads, L]
             h_vi = att @ h_vi # [1, heads, hid]
             h_vi = torch.sum(h_vi,1) 
