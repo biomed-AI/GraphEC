@@ -34,9 +34,13 @@ def get_prottrans(fasta_file,output_path, gpu):
                 seq_list.append(" ".join(list(line.strip())))
 
     # Replace it with your own path
+    Max_protrans_path = "../Data/ProtTrans/Max_protrans.npy"
+    Min_protrans_path = "../Data/ProtTrans/Min_protrans.npy"
     model_path = "/home/songyd/software/Prot-T5-XL-U50"
     tokenizer = T5Tokenizer.from_pretrained(model_path, do_lower_case=False)
     model = T5EncoderModel.from_pretrained(model_path)
+    Max_protrans = np.load(open(Max_protrans_path, 'rb'))
+    Min_protrans = np.load(open(Min_protrans_path, 'rb'))
     gc.collect()
     device = torch.device('cuda:' + gpu if torch.cuda.is_available() and gpu else 'cpu')
     model = model.eval()
@@ -74,6 +78,7 @@ def get_prottrans(fasta_file,output_path, gpu):
         for seq_num in range(len(embedding)):
             seq_len = (attention_mask[seq_num] == 1).sum()
             seq_emd = embedding[seq_num][:seq_len-1]
+            seq_emd = (seq_emd - Min_protrans) / (Max_protrans - Min_protrans)
             torch.save(seq_emd, output_path + batch_ID_list[seq_num] + '.tensor')
             endtime = datetime.datetime.now()
             print('endtime')
