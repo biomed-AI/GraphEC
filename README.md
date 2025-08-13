@@ -14,9 +14,9 @@ Python 3.8.16, numpy v1.24.3, pyg v2.3.0, pytorch v1.13.1, biopython v1.81, debu
 **3.** Run GraphEC with the following command:    
       
 ```
-bash run.sh EC_number ./Data/fasta/EC_number.fasta 0
+bash run.sh EC_number ./Data/fasta/EC_number.fasta gpu_num
 ```
-where ```EC_number``` represents the prediction task; ```./Data/fasta/EC_number.fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction.   
+where ```EC_number``` represents the prediction task; ```./Data/fasta/EC_number.fasta``` represents the data needed to be predicted in fasta format; and ```gpu_num``` represents the GPU used to complete the prediction.   
       
 The results can be found in ```./EC_number/results```, including the full predictions and top K predictive scores (K is defaulted to 5).   
 
@@ -28,18 +28,18 @@ chmod -R 755 ./EC_number/tools/
 
 **4.** Run GraphEC-AS by the following command:    
 ```
-bash run.sh ActiveSite ./Data/fasta/Active_sites.fasta 0
+bash run.sh ActiveSite ./Data/fasta/Active_sites.fasta gpu_num
 ```
-where ```ActiveSite``` represents the prediction of active sites; ```./Data/fasta/Active_sites.fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction. 
+where ```ActiveSite``` represents the prediction of active sites; ```./Data/fasta/Active_sites.fasta``` represents the data needed to be predicted in fasta format; and ```gpu_num``` represents the GPU used to complete the prediction. 
 
 The results are saved in ```./Active_sites/results```
 
 **5.** Run GraphEC-pH by the following command:
 
 ```
-bash run.sh Optimum_pH ./Data/fasta/optimum_pH.fasta 0
+bash run.sh Optimum_pH ./Data/fasta/optimum_pH.fasta gpu_num
 ```
-where ```Optimum_pH``` indicates the prediction of optimum pH; ```./Data/fasta/optimum_pH.fasta``` represents the data needed to be predicted in fasta format; and ```--gpu``` represents the GPU used to complete the prediction.     
+where ```Optimum_pH``` indicates the prediction of optimum pH; ```./Data/fasta/optimum_pH.fasta``` represents the data needed to be predicted in fasta format; and ```gpu_num``` represents the GPU used to complete the prediction.     
 
 The results are saved in ```./Optimum_pH/results```
 
