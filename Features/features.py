@@ -78,7 +78,8 @@ def get_prottrans(fasta_file,output_path, gpu):
         for seq_num in range(len(embedding)):
             seq_len = (attention_mask[seq_num] == 1).sum()
             seq_emd = embedding[seq_num][:seq_len-1]
-            seq_emd = (seq_emd - Min_protTrans) / (Max_protTrans - Min_protTrans)
+            # If normalization is required
+            # seq_emd = (seq_emd - Min_protTrans) / (Max_protTrans - Min_protTrans)
             torch.save(seq_emd, output_path + batch_ID_list[seq_num] + '.tensor')
             endtime = datetime.datetime.now()
             print('endtime')
