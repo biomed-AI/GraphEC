@@ -44,6 +44,8 @@ def extract_features(name_seq, fasta, gpu):
         if not os.path.exists('./Data/DSSP/' + id + '.tensor'):
             signal_dssp = 1
     
+    # import pdb; pdb.set_trace()
+    # signal_prot = 1
     if signal_str == 1:
         # get the structural features from ESMFold-predicted structures
         features.get_esmfold(fasta, './Data/Structures/')
@@ -62,19 +64,19 @@ def extract_features(name_seq, fasta, gpu):
 if __name__ == '__main__':
     parser.add_argument("--task", type=str, default='ActiveSite')
     parser.add_argument("--fasta", type=str, default='./Data/fasta/Active_sites.fasta')
-    parser.add_argument("--gpu", type=str, default=None)
+    parser.add_argument("--gpu", type=int, default=None)
     args = parser.parse_args()
     name_seq = process_fasta(args.fasta)
     extract_features(name_seq, args.fasta, args.gpu)
     if args.task == 'EC_number':
         # predict the EC numbers
-        os.system('python ./Active_sites/main.py')
-        os.system('python ./EC_number/main.py --fasta {}'.format(args.fasta))
+        # os.system('python ./Active_sites/main.py --gpu {}'.format(args.gpu))
+        os.system('python ./EC_number/main.py --fasta {} --gpu {} '.format(args.fasta, args.gpu))
     elif args.task == 'ActiveSite':
         # predict the active sites
-        os.system('python ./Active_sites/main.py')
+        os.system('python ./Active_sites/main.py --gpu {}'.format(args.gpu))
     elif args.task == 'Optimum_pH':
         # predict the optimum pH
-        os.system('python ./Optimum_pH/main.py')
+        os.system('python ./Optimum_pH/main.py --gpu {}'.format(args.gpu))
     else:
         print('Please enter the correct task name!')
