@@ -77,7 +77,7 @@ def predict(args=None, seed=None):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # load the active site data
-    with open("./Active_sites/results/test_pred_dict.pkl",'rb') as r1:
+    with open("./Active_sites/results/EC_test_ver1.pkl",'rb') as r1:
         test_active_sites = pickle.load(r1)
 
     # load the data for prediction
