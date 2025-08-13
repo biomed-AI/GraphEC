@@ -31,8 +31,8 @@ class ProteinGraphDataset(data.Dataset):
     
     def _featurize_graph(self, idx):
         name = self.IDs[idx]
-        Max_protTrans_path = "../Data/ProtTrans/Max_ProtTrans.npy"
-        Min_protTrans_path = "../Data/ProtTrans/Min_ProtTrans.npy"
+        Max_protTrans_path = "./Data/ProtTrans/Max_ProtTrans.npy"
+        Min_protTrans_path = "./Data/ProtTrans/Min_ProtTrans.npy"
         Max_protTrans = np.load(open(Max_protTrans_path, 'rb'))
         Min_protTrans = np.load(open(Min_protTrans_path, 'rb'))
         with torch.no_grad():
