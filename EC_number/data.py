@@ -31,6 +31,10 @@ class ProteinGraphDataset(data.Dataset):
     
     def _featurize_graph(self, idx):
         name = self.IDs[idx]
+        Max_protTrans_path = "../Data/ProtTrans/Max_protTrans.npy"
+        Min_protTrans_path = "../Data/ProtTrans/Min_protTrans.npy"
+        Max_protTrans = np.load(open(Max_protTrans_path, 'rb'))
+        Min_protTrans = np.load(open(Min_protTrans_path, 'rb'))
         with torch.no_grad():
             # get the atomic coordinates from ESMFold-predicted structures
             X = torch.load('./Data/Structures/' + name + ".tensor")
@@ -40,6 +44,8 @@ class ProteinGraphDataset(data.Dataset):
 
             # get the ProtTrans features
             prottrans_feat = torch.load('./Data/ProtTrans/' + name + ".tensor")
+            # If normalization is required
+            # prottrans_feat = (prottrans_feat - Min_protTrans) / (Max_protTrans - Min_protTrans)
 
             # get the DSSP features
             dssp_feat = torch.load('./Data/DSSP/' + name + ".tensor")
